@@ -17,7 +17,7 @@ SRC_OBJ = objs/
 SRC_INCLUDES = includes/
 
 HEADER = push_swap.h
-SRC = main.c utils.c arg.c resolve.c swap.c push.c rotate.c reverse.c
+SRC = main.c utils.c arg.c resolve.c swap.c push.c rotate.c reverse.c minmax.c list.c print_array.c
 
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 OPTIONS =  -I$(SRC_INCLUDES)
@@ -31,6 +31,7 @@ CC = gcc
 RM = rm -f
 
 $(SRC_OBJ)%.o: $(SRC_PATH)%.c $(HEADERS)
+	mkdir -p $(SRC_OBJ)
 	$(CC) $(CFLAGS) $(OPTIONS) -o $(@) -c $(<)
 
 all: $(NAME)

@@ -29,6 +29,7 @@ int	main(int argc, char **argv)
 	data.len_stack_b = 0;
 	data.stack_a = NULL;
 	data.stack_b = NULL;
+	data.instruct = NULL;
 	if (argc != 2
 		|| init_resolve(argv[1], &data)
 		|| valid_argv(data)

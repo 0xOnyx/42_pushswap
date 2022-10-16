@@ -8,7 +8,7 @@
 /*   Created: 2022/10/14 22:44:13 by jerdos-s          #+#    #+#             */
 /*   Updated: 2022/10/14 22:44:14 by jerdos-s         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */≥≥
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
@@ -57,4 +57,21 @@ int	ft_atoi(char *str)
 		str++;
 	}
 	return (res * neg);
+}
+
+int ft_calloc(void **ptr, size_t size, size_t len)
+{
+	unsigned char	*current;
+	void			*res;
+	size_t	i;
+
+	res = malloc(size * len);
+	*ptr = res;
+	current = (unsigned char *)res;
+	if (!res)
+		return (1);
+	i = 0;
+	while (i < len)
+		current[i++] = 0;
+	return (0);
 }

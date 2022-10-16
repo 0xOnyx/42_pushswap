@@ -31,17 +31,6 @@ static int	calc_len(char *str)
 	return (res);
 }
 
-static int	ft_calloc(void **ptr, size_t size, size_t len)
-{
-	void	*res;
-
-	res = malloc(size * len);
-	*ptr = res;
-	if (!res)
-		return (1);
-	return (0);
-}
-
 int	init_resolve(char *str, t_data *data)
 {
 	int	i;
