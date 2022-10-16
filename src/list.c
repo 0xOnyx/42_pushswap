@@ -4,7 +4,7 @@ static t_node *create_node(t_list list)
 {
 	t_node	*current;
 
-	if (calloc(&current, sizeof(t_node), 1))
+	if (ft_calloc((void *)&current, sizeof(t_node), 1))
 		return (NULL);
 	current->data = list;
 	current->next = NULL;

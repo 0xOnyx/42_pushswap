@@ -71,8 +71,8 @@ void	reverse_rra(t_data *data);
 void	reverse_rrb(t_data *data);
 void	reverse_rrr(t_data *data);
 
-int 	set_min_max(t_min_max *min_max, int *tab, int len);
-
+void 	set_min_max(t_min_max *min_max, int *tab, int len);
+int 	push_front(t_node **node, t_list list);
 
 void	print_array(t_data *data);
 
