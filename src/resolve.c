@@ -12,27 +12,36 @@
 
 #include "push_swap.h"
 
-static int set_sort_pivot(int pivot, t_data *data, int *len_stack, int *stack)
+static int set_sort_pivot(int pivot, t_data *data, int len_stack, int *stack)
 {
 	int	i;
+	int	res;
 
 	i = 0;
-
-	while (i < data->max_len)
+	res = 0;
+	while (i < len_stack)
 	{
 		if (stack[i] < pivot)
 		{
 			if (stack == data->stack_a)
+			{
+				push_front(&data->instruct, pa);
 				push_pa(data);
+				res++;
+			}
 		}
 		else
 		{
-			if (stack == data->stack_b)
-				push_pb(data);
+			if (stack == data->stack_a)
+			{
+				push_front(&data->instruct, ra);
+				rotate_ra(data);
+				res++;
+			}
 		}
-
+		i++;
 	}
-	return (i);
+	return (res);
 }
 
 static int quicksort(t_data *data)
@@ -43,20 +52,25 @@ static int quicksort(t_data *data)
 
 	set_min_max(&min_max_a, data->stack_a, data->len_stack_a);
 	set_min_max(&min_max_b, data->stack_b, data->len_stack_b);
-	len = set_sort_pivot(min_max_a.pivot, data, &data->len_stack_a, data->stack_a);
-	len = set_sort_pivot(min_max_b.pivot, data, &data->len_stack_b, data->stack_b);
-	quicksort(data);
+	len = set_sort_pivot(min_max_a.pivot, data, data->len_stack_a, data->stack_a);
+	//len = set_sort_pivot(min_max_b.pivot, data, &data->len_stack_b, data->stack_b);
+	if (len > 0)
+		return (0);
 	print_array(data);
 	return (len);
 }
 
 int	resolve(t_data *data)
 {
+	t_node	*current;
+
 	quicksort(data);
+	current = data->instruct;
+	while (current)
+	{
+		if (current->data == pa)
+			ft_putstr_fd(1, "pa\n");
+		current = current->next;
+	}
 	return (0);
 }
-
-
-3
-
-2

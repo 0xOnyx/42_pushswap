@@ -63,7 +63,7 @@ int ft_calloc(void **ptr, size_t size, size_t len)
 {
 	unsigned char	*current;
 	void			*res;
-	size_t	i;
+	size_t			i;
 
 	res = malloc(size * len);
 	*ptr = res;

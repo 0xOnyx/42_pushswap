@@ -6,7 +6,7 @@ static int	get_min(int *tab, int len)
 	int i;
 
 	i = 0;
-	min = [i];
+	min = tab[i];
 	while (i < len)
 	{
 		if (tab[i] < min)
@@ -29,9 +29,10 @@ static int	get_max(int *tab, int len)
 			max = tab[i];
 		i++;
 	}
+	return (max);
 }
 
-int	set_min_max(t_min_max *min_max, int *tab, int len)
+void	set_min_max(t_min_max *min_max, int *tab, int len)
 {
 	min_max->min = get_min(tab, len);
 	min_max->max = get_max(tab, len);
