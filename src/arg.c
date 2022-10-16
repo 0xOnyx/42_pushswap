@@ -30,13 +30,14 @@ static int	calc_len(char *str)
 	}
 	return (res);
 }
-
+#include <stdio.h>
 int	init_resolve(char *str, t_data *data)
 {
 	int	i;
 	int	tab_i;
 
 	data->max_len = calc_len(str);
+	printf("len => %d\n", data->max_len );
 	data->len_stack_a = data->max_len;
 	if (ft_calloc((void **)&data->stack_a, sizeof(int), data->max_len)
 		|| ft_calloc((void **)&data->stack_b, sizeof(int), data->max_len))

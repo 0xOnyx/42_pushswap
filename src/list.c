@@ -1,5 +1,5 @@
 #include "push_swap.h"
-
+#include <stdio.h>
 static t_node *create_node(t_list list)
 {
 	t_node	*current;
@@ -18,7 +18,7 @@ int	push_front(t_node **node, t_list list)
 
 	current = *node;
 	new_node = create_node(list);
-	if (*node == NULL)
+	if (new_node == NULL)
 		return (1);
 	if (current == NULL)
 	{
@@ -28,5 +28,5 @@ int	push_front(t_node **node, t_list list)
 	while (current->next)
 		current = current->next;
 	current->next = new_node;
-	return (1);
+	return (0);
 }

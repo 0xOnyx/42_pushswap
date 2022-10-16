@@ -36,5 +36,5 @@ void	set_min_max(t_min_max *min_max, int *tab, int len)
 {
 	min_max->min = get_min(tab, len);
 	min_max->max = get_max(tab, len);
-	min_max->pivot = min_max->max - min_max->min;
+	min_max->pivot = (min_max->max + min_max->min) / 2;
 }
