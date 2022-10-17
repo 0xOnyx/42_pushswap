@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+#include <stdio.h>
 static void	safe_clean(t_data data)
 {
 	if (!data.stack_a)
@@ -30,8 +30,8 @@ int	main(int argc, char **argv)
 	data.stack_a = NULL;
 	data.stack_b = NULL;
 	data.instruct = NULL;
-	if (argc != 2
-		|| init_resolve(argv[1], &data)
+	if (argc < 2
+		|| init_resolve(argc - 1, argv + 1, &data)
 		|| valid_argv(data)
 		|| resolve(&data))
 	{

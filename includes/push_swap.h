@@ -49,7 +49,7 @@ typedef struct s_data
 
 int		ft_strlen(char *str);
 int		ft_putstr_fd(int fd, char *str);
-int		init_resolve(char *str, t_data *data);
+int		init_resolve(int argc, char **argv, t_data *data);
 int		valid_argv(t_data data);
 int		resolve(t_data *data);
 int		ft_isdigit(char c);
@@ -58,11 +58,12 @@ int		ft_calloc(void **ptr, size_t size, size_t len);
 
 void	swap_sa(t_data *data);
 void	swap_sb(t_data *data);
-
 void	swap_ss(t_data *data);
-void	push_pa(t_data *data);
 
+
+void	push_pa(t_data *data);
 void	push_pb(t_data *data);
+
 void	rotate_ra(t_data *data);
 void	rotate_rb(t_data *data);
 void	rotate_rr(t_data *data);

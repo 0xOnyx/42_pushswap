@@ -12,50 +12,41 @@
 
 #include "push_swap.h"
 
-static int	calc_len(char *str)
+static int is_number(char *str)
 {
 	int	i;
-	int	res;
 
 	i = 0;
-	res = 0;
-	while (str[0])
+	while (str[i])
 	{
-		if ((str[i + 1] == ' ' || str[i + 1] == '\0')
-			&& (str[i] != ' ' && str[i] != '\0'))
-			res++;
-		if (str[i + 1] == '\0')
-			break ;
+		if ((str[i] < '0' || str[i] > '9') && str[i] != '-')
+			return (0);
 		i++;
 	}
-	return (res);
+	return (1);
 }
-#include <stdio.h>
-int	init_resolve(char *str, t_data *data)
+
+int	init_resolve(int argc, char **argv, t_data *data)
 {
 	int	i;
 	int	tab_i;
 
-	data->max_len = calc_len(str);
-	printf("len => %d\n", data->max_len );
+	data->max_len = argc;
 	data->len_stack_a = data->max_len;
 	if (ft_calloc((void **)&data->stack_a, sizeof(int), data->max_len)
 		|| ft_calloc((void **)&data->stack_b, sizeof(int), data->max_len))
 		return (1);
 	i = 0;
 	tab_i = 0;
-	while (str[i])
+	while (i < argc)
 	{
-		while (str[i] && (!ft_isdigit(str[i]) && str[i] != '-'))
-			i++;
-		if (str[i])
-			data->stack_a[tab_i++] = ft_atoi(str + i);
-		while (str[i] && (ft_isdigit(str[i]) || str[i] == '-'))
-			i++;
+		if (!is_number(argv[i]))
+			return (0);
+		data->stack_a[data->max_len - ++tab_i] = ft_atoi(argv[i]);
+		i++;
 	}
 	return (0);
 }
-
 int	valid_argv(t_data data)
 {
 	int	i;
@@ -67,7 +58,7 @@ int	valid_argv(t_data data)
 		x = i;
 		while (x < data.max_len)
 		{
-			if (x != i && data.stack_a[i] == data.stack_b[i])
+			if (x != i && data.stack_a[x] == data.stack_a[i])
 				return (1);
 			x++;
 		}

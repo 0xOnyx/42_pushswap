@@ -14,5 +14,5 @@ void	print_array(t_data *data)
 			   data->stack_b[i] > 0 ? data->stack_b[i]: 0);
 		i++;
 	}
-	printf(" A_\t| B_\n");
+	printf(" A_\t| B_\n\n");
 }
