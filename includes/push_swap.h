@@ -55,6 +55,7 @@ int		resolve(t_data *data);
 int		ft_isdigit(char c);
 int		ft_atoi(char *str);
 int		ft_calloc(void **ptr, size_t size, size_t len);
+void	ft_swap(int *a, int *b);
 
 void	swap_sa(t_data *data);
 void	swap_sb(t_data *data);

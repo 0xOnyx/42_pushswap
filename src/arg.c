@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 static int is_number(char *str)
 {
@@ -24,6 +25,66 @@ static int is_number(char *str)
 		i++;
 	}
 	return (1);
+}
+
+static int parition_quicksort(int *tab, int min, int max)
+{
+	int	pivot;
+	int	i;
+	int	j;
+
+	pivot = tab[max];
+	i = min - 1;
+	j = min;
+	while (j < max)
+	{
+		if (tab[j] < pivot)
+		{
+			i++;
+			ft_swap(&tab[i], &tab[j]);
+		}
+		j++;
+	}
+	ft_swap(&tab[i + 1], &tab[max]);
+	return (i + 1);
+
+}
+
+static void quicksort(int *tab, int min, int max)
+{
+	int	partition;
+
+	if (min < max)
+	{
+		partition = parition_quicksort(tab, min, max);
+		quicksort(tab, min, partition - 1);
+		quicksort(tab, partition + 1, max);
+	}
+}
+
+static void init_b(t_data *data)
+{
+	int	a;
+	int	b;
+	int *res;
+
+	a = 0;
+	quicksort(data->stack_b, 0, data->max_len - 1);
+	if (ft_calloc((void **)&res, sizeof(int),  data->max_len))
+		return ;
+	while(a < data->max_len)
+	{
+		b = 0;
+		while(b < data->max_len)
+		{
+			if (data->stack_a[a] == data->stack_b[b])
+				res[a] = b;
+			b++;
+		}
+		a++;
+	}
+	free(data->stack_a);
+	data->stack_a = res;
 }
 
 int	init_resolve(int argc, char **argv, t_data *data)
@@ -42,11 +103,18 @@ int	init_resolve(int argc, char **argv, t_data *data)
 	{
 		if (!is_number(argv[i]))
 			return (0);
-		data->stack_a[data->max_len - ++tab_i] = ft_atoi(argv[i]);
+		data->stack_a[data->max_len - tab_i - 1] = ft_atoi(argv[i]);
+		data->stack_b[data->max_len - tab_i - 1] = data->stack_a[data->max_len - tab_i - 1];
+		tab_i++;
 		i++;
 	}
+	init_b(data);
+	i = 0;
+	while (i < data->max_len)
+		data->stack_b[i++] = 0;
 	return (0);
 }
+
 int	valid_argv(t_data data)
 {
 	int	i;

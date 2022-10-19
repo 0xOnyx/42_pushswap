@@ -12,6 +12,16 @@
 
 #include "push_swap.h"
 #include <stdio.h>
+
+void	ft_swap(int *a, int *b)
+{
+	int	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
 static void	safe_clean(t_data data)
 {
 	if (!data.stack_a)
