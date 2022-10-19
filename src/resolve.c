@@ -48,10 +48,10 @@ static void	search_max(t_data *data, int len)
 {
 	int	i;
 	int	max;
-	int rrb;
+	int rrb_c;
 
 	i = 1;
-	rrb = 0;
+	rrb_c = 0;
 	max = data->stack_b[0];
 	while (i < len)
 	{
@@ -63,16 +63,15 @@ static void	search_max(t_data *data, int len)
 	{
 		push_front(&data->instruct, rb);
 		rotate_rb(data);
-		rrb++;
+		rrb_c++;
 	}
-	printf("rrb => %d\n", rrb);
 	push_front(&data->instruct, pa);
 	push_pa(data);
-	/*while(rrb--)
+	while(rrb_c--)
 	{
 		push_front(&data->instruct, rrb);
 		reverse_rrb(data);
-	}*/
+	}
 }
 
 static int	pivoting(int pivot, t_data *data)
@@ -111,21 +110,19 @@ static void	quicksort(t_data *data)
 
 	set_min_max(&min_max_a, data->stack_a, data->len_stack_a);
 	set_min_max(&min_max_b, data->stack_b, data->len_stack_b);
-	printf("pivot => %d\n", min_max_a.pivot);
 	res = pivoting(min_max_a.pivot, data);
 	if (res < 3)
 		return ;
 	quicksort(data);
-	while (data->len_stack_b)
+	while (res--)
 		search_max(data, data->len_stack_b);
-	//print_array(data);
 }
 
 int	resolve(t_data *data)
 {
 	quicksort(data);
 
+
 	print_solution(data->instruct);
-	//print_array(data);
 	return (0);
 }
