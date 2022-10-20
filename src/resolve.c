@@ -12,40 +12,16 @@
 
 #include "push_swap.h"
 
-static void	print_solution(t_node *current)
-{
-	while (current)
-	{
-		if (current->data == sa)
-			ft_putstr_fd(1, "sa\n");
-		else if (current->data == sb)
-			ft_putstr_fd(1, "sb\n");
-		else if (current->data == pa)
-			ft_putstr_fd(1, s"pa\n");
-		else if (current->data == pb)
-			ft_putstr_fd(1, "pb\n");
-		else if (current->data == ra)
-			ft_putstr_fd(1, "ra\n");
-		else if (current->data == rb)
-			ft_putstr_fd(1, "rb\n");
-		else if (current->data == rra)
-			ft_putstr_fd(1, "rra\n");
-		else if (current->data == rrb)
-			ft_putstr_fd(1, "rrb\n");
-		current = current->next;
-	}
-}
-
 static void	raddix(t_data *data, int chift)
 {
-	int len;
+	int	len;
 
 	if (chift >= data->len_bits)
 		return ;
 	len = data->len_stack_a;
 	while (--len >= 0)
 	{
-		if ((data->stack_a[data->len_stack_a - 1] >> chift)&1)
+		if ((data->stack_a[data->len_stack_a - 1] >> chift) & 1)
 		{
 			rotate_ra(data);
 			push_front(&data->instruct, ra);
@@ -66,21 +42,15 @@ static void	raddix(t_data *data, int chift)
 
 static void	short_solve(t_data *data)
 {
-	struct	s_min_max val;
-	struct	s_min_max pos;
+	struct s_min_max	val;
+	struct s_min_max	pos;
 
 	val.min = get_min(data->stack_a, data->len_stack_a);
 	val.max = get_max(data->stack_a, data->len_stack_a);
 	val.pivot = get_mid(data->stack_a, data->len_stack_a, val.min, val.max);
-	pos.min = 0;
-	while (data->stack_a[pos.min] != val.min)
-		pos.min++;
-	pos.max = 0;
-	while (data->stack_a[pos.max] != val.max)
-		pos.max++;
-	pos.pivot = 0;
-	while (data->stack_a[pos.pivot] != val.pivot)
-		pos.pivot++;
+	get_pos(data->stack_a, &pos.min, val.min);
+	get_pos(data->stack_a, &pos.max, val.max);
+	get_pos(data->stack_a, &pos.pivot, val.pivot);
 	if (pos.min == 1 && pos.max == 0 && pos.pivot == 2)
 	{
 		swap_sa(data);
@@ -126,7 +96,7 @@ static void	very_short_solve(t_data *data)
 	}
 }
 
-static void middle_solve(t_data *data)
+static void	middle_solve(t_data *data)
 {
 	int			i;
 	int			final;

@@ -17,7 +17,7 @@ SRC_OBJ = objs/
 SRC_INCLUDES = includes/
 
 HEADER = push_swap.h
-SRC = main.c utils.c arg.c resolve.c swap.c push.c rotate.c reverse.c minmax.c list.c print_array.c list.c
+SRC = main.c utils.c arg.c resolve.c swap.c push.c rotate.c reverse.c minmax.c list.c list.c print_solution.c get_pos.c
 
 CFLAGS =-g3 -fsanitize=address
 OPTIONS =  -I$(SRC_INCLUDES)

@@ -33,7 +33,7 @@ int	get_mid(int *tab, int len, int min, int max)
 int	get_max(int *tab, int len)
 {
 	int	max;
-	int i;
+	int	i;
 
 	i = 0;
 	max = tab[i];
