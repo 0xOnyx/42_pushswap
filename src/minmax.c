@@ -1,9 +1,9 @@
 #include "push_swap.h"
 
-static int	get_min(int *tab, int len)
+int	get_min(int *tab, int len)
 {
 	int	min;
-	int i;
+	int	i;
 
 	i = 0;
 	min = tab[i];
@@ -16,7 +16,21 @@ static int	get_min(int *tab, int len)
 	return (min);
 }
 
-static int	get_max(int *tab, int len)
+int	get_mid(int *tab, int len, int min, int max)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (tab[i] != min && tab[i] != max)
+			return (tab[i]);
+		i++;
+	}
+	return (0);
+}
+
+int	get_max(int *tab, int len)
 {
 	int	max;
 	int i;

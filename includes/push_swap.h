@@ -19,21 +19,28 @@ typedef struct s_min_max
 {
 	int	min;
 	int	max;
-	int pivot;
+	int	pivot;
 }	t_min_max;
 
 typedef enum e_list
 {
-	sa, sb,	ss,
-	pa,	pb,
-	ra,	rb,	rr,	rra,
-	rrb, rrr
+	sa,
+	sb,
+	ss,
+	pa,
+	pb,
+	ra,
+	rb,
+	rr,
+	rra,
+	rrb,
+	rrr
 }	t_list;
 
 typedef struct s_node
 {
-	enum e_list 	data;
-	struct s_node 	*next;
+	enum e_list		data;
+	struct s_node	*next;
 
 }	t_node;
 
@@ -42,6 +49,7 @@ typedef struct s_data
 	int		max_len;
 	int		len_stack_a;
 	int		len_stack_b;
+	int		len_bits;
 	int		*stack_a;
 	int		*stack_b;
 	t_node	*instruct;
@@ -61,7 +69,6 @@ void	swap_sa(t_data *data);
 void	swap_sb(t_data *data);
 void	swap_ss(t_data *data);
 
-
 void	push_pa(t_data *data);
 void	push_pb(t_data *data);
 
@@ -73,9 +80,11 @@ void	reverse_rra(t_data *data);
 void	reverse_rrb(t_data *data);
 void	reverse_rrr(t_data *data);
 
-void 	set_min_max(t_min_max *min_max, int *tab, int len);
-int 	push_front(t_node **node, t_list list);
+void	set_min_max(t_min_max *min_max, int *tab, int len);
+int		push_front(t_node **node, t_list list);
 
-void	print_array(t_data *data);
+int		get_min(int *tab, int len);
+int		get_mid(int *tab, int len, int min, int max);
+int		get_max(int *tab, int len);
 
 #endif

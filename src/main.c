@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void	ft_swap(int *a, int *b)
 {
@@ -30,20 +29,52 @@ static void	safe_clean(t_data data)
 		free(data.stack_b);
 }
 
+static void init(t_data *data)
+{
+	data->max_len = 0;
+	data->len_stack_a = 0;
+	data->len_stack_b = 0;
+	data->stack_a = NULL;
+	data->stack_b = NULL;
+	data->instruct = NULL;
+	data->len_bits = 0;
+}
+
+static int	ft_issort(int argc, char **argv)
+{
+	int	i;
+	int	last;
+	int	current;
+
+	i = 0;
+	last = ft_atoi(argv[0]);
+	while (++i < argc)
+	{
+		current = ft_atoi(argv[i]);
+		if (last > current)
+			return (0);
+		last = current;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
 
-	data.max_len = 0;
-	data.len_stack_a = 0;
-	data.len_stack_b = 0;
-	data.stack_a = NULL;
-	data.stack_b = NULL;
-	data.instruct = NULL;
-	if (argc < 2
-		|| init_resolve(argc - 1, argv + 1, &data)
-		|| valid_argv(data)
-		|| resolve(&data))
+	init(&data);
+	if (argc <= 2)
+		return (1);
+	if (init_resolve(argc - 1, argv + 1, &data)
+		|| valid_argv(data))
+	{
+		safe_clean(data);
+		ft_putstr_fd(2, "Error\n");
+		return (1);
+	}
+	if (ft_issort(argc - 1, argv + 1))
+		return (1);
+	if (resolve(&data))
 	{
 		safe_clean(data);
 		ft_putstr_fd(2, "Error\n");

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
+
 int	ft_strlen(char *str)
 {
 	int	i;
@@ -59,7 +59,7 @@ int	ft_atoi(char *str)
 	return (res * neg);
 }
 
-int ft_calloc(void **ptr, size_t size, size_t len)
+int	ft_calloc(void **ptr, size_t size, size_t len)
 {
 	unsigned char	*current;
 	void			*res;

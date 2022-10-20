@@ -11,9 +11,8 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
-static int is_number(char *str)
+static int	is_number(char *str)
 {
 	int	i;
 
@@ -27,7 +26,7 @@ static int is_number(char *str)
 	return (1);
 }
 
-static int parition_quicksort(int *tab, int min, int max)
+static int	parition_quicksort(int *tab, int min, int max)
 {
 	int	pivot;
 	int	i;
@@ -47,10 +46,9 @@ static int parition_quicksort(int *tab, int min, int max)
 	}
 	ft_swap(&tab[i + 1], &tab[max]);
 	return (i + 1);
-
 }
 
-static void quicksort(int *tab, int min, int max)
+static void	quicksort(int *tab, int min, int max)
 {
 	int	partition;
 
@@ -62,20 +60,21 @@ static void quicksort(int *tab, int min, int max)
 	}
 }
 
-static void init_b(t_data *data)
+static void	init_b(t_data *data)
 {
 	int	a;
 	int	b;
-	int *res;
+	int	max;
+	int	*res;
 
 	a = 0;
 	quicksort(data->stack_b, 0, data->max_len - 1);
-	if (ft_calloc((void **)&res, sizeof(int),  data->max_len))
+	if (ft_calloc((void **)&res, sizeof(int), data->max_len))
 		return ;
-	while(a < data->max_len)
+	while (a < data->max_len)
 	{
 		b = 0;
-		while(b < data->max_len)
+		while (b < data->max_len)
 		{
 			if (data->stack_a[a] == data->stack_b[b])
 				res[a] = b;
@@ -83,6 +82,9 @@ static void init_b(t_data *data)
 		}
 		a++;
 	}
+	max = data->stack_b[data->max_len - 1];
+	while ((max >> data->len_bits) != 0)
+		++data->len_bits;
 	free(data->stack_a);
 	data->stack_a = res;
 }
@@ -90,6 +92,7 @@ static void init_b(t_data *data)
 int	init_resolve(int argc, char **argv, t_data *data)
 {
 	int	i;
+	int	pos;
 	int	tab_i;
 
 	data->max_len = argc;
@@ -101,10 +104,11 @@ int	init_resolve(int argc, char **argv, t_data *data)
 	tab_i = 0;
 	while (i < argc)
 	{
+		pos = data->max_len - tab_i - 1;
 		if (!is_number(argv[i]))
 			return (0);
-		data->stack_a[data->max_len - tab_i - 1] = ft_atoi(argv[i]);
-		data->stack_b[data->max_len - tab_i - 1] = data->stack_a[data->max_len - tab_i - 1];
+		data->stack_a[pos] = ft_atoi(argv[i]);
+		data->stack_b[pos] = data->stack_a[pos];
 		tab_i++;
 		i++;
 	}

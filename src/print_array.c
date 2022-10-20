@@ -16,18 +16,15 @@ void print_bin(int a)
 
 void	print_array(t_data *data)
 {
-	int i;
-
-
-
+	int	i;
 
 	i = data->max_len;
 	while (--i >= 0)
 	{
 		print_bin(data->stack_a[i]);
-		//printf("%d", data->stack_a[i]);
-		printf("\t");
-		//printf("%d", data->stack_a[i]);
+		printf("\t%d", data->stack_a[i]);
+		printf("|");
+		printf("%d\t", data->stack_b[i]);
 		print_bin(data->stack_b[i]);
 		printf("\n");
 	}

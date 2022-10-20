@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
-static t_node *create_node(t_list list)
+
+static t_node	*create_node(t_list list)
 {
 	t_node	*current;
 
