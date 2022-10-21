@@ -21,9 +21,10 @@ SRC =	main.c utils.c arg.c \
 		resolve.c swap.c push.c \
 		rotate.c reverse.c minmax.c \
 		list.c list.c print_solution.c \
-		get_pos.c arg_init.c utils2.c
+		get_pos.c arg_init.c utils2.c \
+		check_digit.c
 
-CFLAGS =-g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 OPTIONS =  -I$(SRC_INCLUDES)
 
 SRCS = $(addprefix $(SRC_PATH),$(SRC))

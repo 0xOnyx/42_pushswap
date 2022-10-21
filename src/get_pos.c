@@ -55,3 +55,48 @@ void	hard_code_short_solve2(t_data *data, struct s_min_max pos)
 		push_front(&data->instruct, ra);
 	}
 }
+
+void	hard_code_sort_five(t_data	*data)
+{
+	int	i;
+
+	i = 2;
+	while (i--)
+	{
+		reverse_rra(data);
+		push_front(&data->instruct, rra);
+		push_pb(data);
+		push_front(&data->instruct, pb);
+	}
+	short_solve(data);
+	push_pa(data);
+	push_front(&data->instruct, pa);
+	push_pa(data);
+	push_front(&data->instruct, pa);
+}
+
+void	up_two_first_elem(t_data *data)
+{
+	int			i;
+	int			final;
+
+	while (data->len_stack_b < 2)
+	{
+		i = 0;
+		final = 0;
+		while (i < data->len_stack_a)
+		{
+			if (data->stack_a[i] < data->stack_a[final])
+				final = i;
+			i++;
+		}
+		final = data->len_stack_a -1 - final;
+		while (final--)
+		{
+			rotate_ra(data);
+			push_front(&data->instruct, ra);
+		}
+		push_pb(data);
+		push_front(&data->instruct, pb);
+	}
+}

@@ -45,7 +45,7 @@ static void	quicksort(int *tab, int min, int max)
 		quicksort(tab, partition + 1, max);
 	}
 }
-
+#include <stdio.h>
 static void	init_b(t_data *data)
 {
 	int	a;
@@ -60,15 +60,19 @@ static void	init_b(t_data *data)
 	while (a < data->max_len)
 	{
 		b = 0;
+
 		while (b < data->max_len)
 		{
 			if (data->stack_a[a] == data->stack_b[b])
+			{
+				if (b == data->max_len - 1)
+					max = b;
 				res[a] = b;
+			}
 			b++;
 		}
 		a++;
 	}
-	max = data->stack_b[data->max_len - 1];
 	while ((max >> data->len_bits) != 0)
 		++data->len_bits;
 	free(data->stack_a);
@@ -81,10 +85,10 @@ int	init_resolve(int argc, char **argv, t_data *data)
 
 	if (argc == 1)
 	{
-		if (init_str(argv[0], data))
+		if (check_digit_str(argv[0]) || init_str(argv[0], data))
 			return (1);
 	}
-	else if (init_arg(argc, argv, data))
+	else if (check_digit_arg(argc, argv) || init_arg(argc, argv, data))
 		return (1);
 	init_b(data);
 	i = 0;

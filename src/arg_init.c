@@ -12,6 +12,24 @@
 
 #include "push_swap.h"
 
+static	int	check_max_int(char *str)
+{
+	long	res;
+
+	res = 0;
+	if (*str == '-')
+		str++;
+	while (ft_isdigit(*str))
+	{
+		res *= 10;
+		res += *str - '0';
+		str++;
+	}
+	if (res > 2147483647)
+		return (1);
+	return (0);
+}
+
 int	init_arg(int argc, char **argv, t_data *data)
 {
 	int	i;
@@ -29,6 +47,8 @@ int	init_arg(int argc, char **argv, t_data *data)
 	{
 		pos = data->max_len - tab_i - 1;
 		if (!is_number(argv[i]))
+			return (1);
+		if (check_max_int(argv[i]))
 			return (1);
 		data->stack_a[pos] = ft_atoi(argv[i]);
 		data->stack_b[pos] = data->stack_a[pos];
@@ -77,7 +97,6 @@ int	len_nbr(int nbr)
 int	init_str(char *str, t_data *data)
 {
 	int	i;
-	int	pos;
 	int	tab_i;
 
 	data->max_len = get_len(str);
@@ -89,14 +108,16 @@ int	init_str(char *str, t_data *data)
 	tab_i = 0;
 	while (str[i])
 	{
-		pos = data->max_len - tab_i - 1;
 		while (!number(str[i]) && str[i] != '\0')
 			i++;
 		if (str[i] == '\0')
 			return (0);
-		data->stack_a[pos] = ft_atoi(str + i);
-		data->stack_b[pos] = data->stack_a[pos];
-		i += len_nbr(data->stack_a[pos]);
+		if (check_max_int(str + 1))
+			return (1);
+		data->stack_a[data->max_len - tab_i - 1] = ft_atoi(str + i);
+		data->stack_b[data->max_len - tab_i - 1] = \
+			data->stack_a[data->max_len - tab_i - 1];
+		i += len_nbr(data->stack_a[data->max_len - tab_i - 1]);
 		tab_i++;
 	}
 	return (0);

@@ -40,7 +40,7 @@ static void	raddix(t_data *data, int chift)
 	raddix(data, chift + 1);
 }
 
-static void	short_solve(t_data *data)
+void	short_solve(t_data *data)
 {
 	struct s_min_max	val;
 	struct s_min_max	pos;
@@ -71,33 +71,17 @@ static void	very_short_solve(t_data *data)
 
 static void	middle_solve(t_data *data)
 {
-	int			i;
-	int			final;
-
-	while (data->len_stack_a > 1)
-	{
-		i = 0;
-		final = 0;
-		while (i < data->len_stack_a)
-		{
-			if (data->stack_a[i] < data->stack_a[final])
-				final = i;
-			i++;
-		}
-		final = data->len_stack_a -1 - final;
-		while (final--)
-		{
-			rotate_ra(data);
-			push_front(&data->instruct, ra);
-		}
-		push_pb(data);
-		push_front(&data->instruct, pb);
-	}
-	while (data->len_stack_a < data->max_len)
-	{
-		push_pa(data);
-		push_front(&data->instruct, pa);
-	}
+	if (data->stack_a[0] < data->stack_a[1]
+		&& data->stack_a[1] < data->stack_a[2]
+		&& data->stack_a[2] < data->stack_a[3]
+		&& data->stack_a[3] < data->stack_a[4])
+		return (hard_code_sort_five(data));
+	up_two_first_elem(data);
+	short_solve(data);
+	push_pa(data);
+	push_front(&data->instruct, pa);
+	push_pa(data);
+	push_front(&data->instruct, pa);
 }
 
 int	resolve(t_data *data)

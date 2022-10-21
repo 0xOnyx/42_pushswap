@@ -72,6 +72,11 @@ int		init_arg(int argc, char **argv, t_data *data);
 int		init_str(char *str, t_data *data);
 int		is_number(char *str);
 int		number(char c);
+void	short_solve(t_data *data);
+void	hard_code_sort_five(t_data *data);
+void	up_two_first_elem(t_data *data);
+int 	check_digit_str(char *str);
+int 	check_digit_arg(int argc, char **argv);
 
 void	swap_sa(t_data *data);
 void	swap_sb(t_data *data);
