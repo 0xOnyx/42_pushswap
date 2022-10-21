@@ -112,12 +112,16 @@ int	init_str(char *str, t_data *data)
 			i++;
 		if (str[i] == '\0')
 			return (0);
+		if (str[i] == '-' && !number(str[i + 1]))
+			return (1);
 		if (check_max_int(str + 1))
 			return (1);
 		data->stack_a[data->max_len - tab_i - 1] = ft_atoi(str + i);
 		data->stack_b[data->max_len - tab_i - 1] = \
 			data->stack_a[data->max_len - tab_i - 1];
 		i += len_nbr(data->stack_a[data->max_len - tab_i - 1]);
+		if (str[i] != ' ' && str[i] != '\0')
+			return (1);
 		tab_i++;
 	}
 	return (0);
