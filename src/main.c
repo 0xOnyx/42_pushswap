@@ -29,7 +29,7 @@ static void	safe_clean(t_data data)
 		free(data.stack_b);
 }
 
-static void init(t_data *data)
+static void	init(t_data *data)
 {
 	data->max_len = 0;
 	data->len_stack_a = 0;
@@ -40,20 +40,21 @@ static void init(t_data *data)
 	data->len_bits = 0;
 }
 
-static int	ft_issort(int argc, char **argv)
+static int	ft_issort(t_data *data)
 {
 	int	i;
 	int	last;
 	int	current;
 
 	i = 0;
-	last = ft_atoi(argv[0]);
-	while (++i < argc)
+	last = data->stack_a[data->len_stack_a - 1];
+	while (i < data->max_len)
 	{
-		current = ft_atoi(argv[i]);
+		current = data->stack_a[data->len_stack_a - i - 1];
 		if (last > current)
 			return (0);
 		last = current;
+		i++;
 	}
 	return (1);
 }
@@ -63,7 +64,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 
 	init(&data);
-	if (argc <= 2)
+	if (argc <= 1)
 		return (1);
 	if (init_resolve(argc - 1, argv + 1, &data)
 		|| valid_argv(data))
@@ -72,7 +73,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd(2, "Error\n");
 		return (1);
 	}
-	if (ft_issort(argc - 1, argv + 1))
+	if (ft_issort(&data))
 		return (1);
 	if (resolve(&data))
 	{

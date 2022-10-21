@@ -6,7 +6,7 @@
 /*   By: jerdos-s <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 22:44:06 by jerdos-s          #+#    #+#             */
-/*   Updated: 2022/10/14 22:44:08 by jerdos-s         ###   ########.fr       */
+/*   Updated: 2022/10/21 14:46:00 by jerdos-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,35 +51,8 @@ static void	short_solve(t_data *data)
 	get_pos(data->stack_a, &pos.min, val.min);
 	get_pos(data->stack_a, &pos.max, val.max);
 	get_pos(data->stack_a, &pos.pivot, val.pivot);
-	if (pos.min == 1 && pos.max == 0 && pos.pivot == 2)
-	{
-		swap_sa(data);
-		push_front(&data->instruct, sa);
-	}
-	else if (pos.min == 1 && pos.max == 2 && pos.pivot == 0)
-	{
-		rotate_ra(data);
-		push_front(&data->instruct, ra);
-	}
-	else if (pos.min == 0 && pos.max == 1 && pos.pivot == 2)
-	{
-		reverse_rra(data);
-		push_front(&data->instruct, rra);
-	}
-	else if (pos.min == 0 && pos.max == 2 && pos.pivot == 1)
-	{
-		swap_sa(data);
-		reverse_rra(data);
-		push_front(&data->instruct, sa);
-		push_front(&data->instruct, rra);
-	}
-	else if (pos.min == 2 && pos.max == 1 && pos.pivot == 0)
-	{
-		swap_sa(data);
-		rotate_ra(data);
-		push_front(&data->instruct, sa);
-		push_front(&data->instruct, ra);
-	}
+	hard_code_short_solve1(data, pos);
+	hard_code_short_solve2(data, pos);
 }
 
 static void	very_short_solve(t_data *data)

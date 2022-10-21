@@ -66,6 +66,12 @@ int		ft_calloc(void **ptr, size_t size, size_t len);
 void	ft_swap(int *a, int *b);
 void	print_solution(t_node *current);
 void	get_pos(int *tab, int *pos, int search);
+void	hard_code_short_solve1(t_data *data, struct s_min_max pos);
+void	hard_code_short_solve2(t_data *data, struct s_min_max pos);
+int		init_arg(int argc, char **argv, t_data *data);
+int		init_str(char *str, t_data *data);
+int		is_number(char *str);
+int		number(char c);
 
 void	swap_sa(t_data *data);
 void	swap_sb(t_data *data);

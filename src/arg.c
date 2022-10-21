@@ -12,20 +12,6 @@
 
 #include "push_swap.h"
 
-static int	is_number(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if ((str[i] < '0' || str[i] > '9') && str[i] != '-')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 static int	parition_quicksort(int *tab, int min, int max)
 {
 	int	pivot;
@@ -92,26 +78,14 @@ static void	init_b(t_data *data)
 int	init_resolve(int argc, char **argv, t_data *data)
 {
 	int	i;
-	int	pos;
-	int	tab_i;
 
-	data->max_len = argc;
-	data->len_stack_a = data->max_len;
-	if (ft_calloc((void **)&data->stack_a, sizeof(int), data->max_len)
-		|| ft_calloc((void **)&data->stack_b, sizeof(int), data->max_len))
-		return (1);
-	i = 0;
-	tab_i = 0;
-	while (i < argc)
+	if (argc == 1)
 	{
-		pos = data->max_len - tab_i - 1;
-		if (!is_number(argv[i]))
-			return (0);
-		data->stack_a[pos] = ft_atoi(argv[i]);
-		data->stack_b[pos] = data->stack_a[pos];
-		tab_i++;
-		i++;
+		if (init_str(argv[0], data))
+			return (1);
 	}
+	else if (init_arg(argc, argv, data))
+		return (1);
 	init_b(data);
 	i = 0;
 	while (i < data->max_len)
