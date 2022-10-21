@@ -41,7 +41,6 @@ typedef struct s_node
 {
 	enum e_list		data;
 	struct s_node	*next;
-
 }	t_node;
 
 typedef struct s_data
@@ -75,8 +74,9 @@ int		number(char c);
 void	short_solve(t_data *data);
 void	hard_code_sort_five(t_data *data);
 void	up_two_first_elem(t_data *data);
-int 	check_digit_str(char *str);
-int 	check_digit_arg(int argc, char **argv);
+int		check_digit_str(char *str);
+int		check_digit_arg(int argc, char **argv);
+void	init_bit(int max, t_data *data);
 
 void	swap_sa(t_data *data);
 void	swap_sb(t_data *data);

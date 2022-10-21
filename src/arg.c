@@ -45,38 +45,34 @@ static void	quicksort(int *tab, int min, int max)
 		quicksort(tab, partition + 1, max);
 	}
 }
-#include <stdio.h>
-static void	init_b(t_data *data)
+
+static int	init_b(t_data *data)
 {
-	int	a;
-	int	b;
-	int	max;
-	int	*res;
+	t_min_max	pos;
+	int			*res;
 
-	a = 0;
-	quicksort(data->stack_b, 0, data->max_len - 1);
+	pos.min = 0;
 	if (ft_calloc((void **)&res, sizeof(int), data->max_len))
-		return ;
-	while (a < data->max_len)
+		return (1);
+	while (pos.min < data->max_len)
 	{
-		b = 0;
-
-		while (b < data->max_len)
+		pos.max = 0;
+		while (pos.max < data->max_len)
 		{
-			if (data->stack_a[a] == data->stack_b[b])
+			if (data->stack_a[pos.min] == data->stack_b[pos.max])
 			{
-				if (b == data->max_len - 1)
-					max = b;
-				res[a] = b;
+				if (pos.max == data->max_len - 1)
+					pos.pivot = pos.max;
+				res[pos.min] = pos.max;
 			}
-			b++;
+			pos.max++;
 		}
-		a++;
+		pos.min++;
 	}
-	while ((max >> data->len_bits) != 0)
-		++data->len_bits;
+	init_bit(pos.pivot, data);
 	free(data->stack_a);
 	data->stack_a = res;
+	return (0);
 }
 
 int	init_resolve(int argc, char **argv, t_data *data)
@@ -90,7 +86,9 @@ int	init_resolve(int argc, char **argv, t_data *data)
 	}
 	else if (check_digit_arg(argc, argv) || init_arg(argc, argv, data))
 		return (1);
-	init_b(data);
+	quicksort(data->stack_b, 0, data->max_len - 1);
+	if (init_b(data))
+		return (1);
 	i = 0;
 	while (i < data->max_len)
 		data->stack_b[i++] = 0;

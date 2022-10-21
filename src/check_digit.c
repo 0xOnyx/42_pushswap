@@ -12,9 +12,15 @@
 
 #include "push_swap.h"
 
-int 	check_digit_str(char *str)
+void	init_bit(int max, t_data *data)
 {
-	int i;
+	while ((max >> data->len_bits) != 0)
+		++data->len_bits;
+}
+
+int	check_digit_str(char *str)
+{
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -26,9 +32,9 @@ int 	check_digit_str(char *str)
 	return (0);
 }
 
-int 	check_digit_arg(int argc, char **argv)
+int	check_digit_arg(int argc, char **argv)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < argc)
